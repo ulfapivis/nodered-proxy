@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: node-red
+    env: docker
+    dockerfilePath: ./Dockerfile
+    autoDeploy: false
+    envVars:
+      - key: ALLOWED_IPS
+        sync: false
+      - key: NODE_RED_CREDENTIAL_SECRET
+        sync: false
+      - key: CUSTOM_NODES
+        sync: false
+      - key: NODE_RED_PASSWORD
+        sync: false
+      - key: NODE_RED_USERNAME
+        sync: false
+      - key: NODE_RED_ADMIN_ROOT
+        sync: false
+    disk:
+        name: data
+        mountPath: /data
+        sizeGB: 5
+
+
