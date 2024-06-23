@@ -283,6 +283,7 @@ module.exports = {
         httpAdminMiddleware: function (req, res, next) {
             const clientIPs = (req.headers['x-forwarded-for'] || '').split(',').map(ip => ip.trim());
             console.log('Client IPs:', clientIPs);
+            console.log('whitelist:', WL);
             if (clientIPs.some(ip => WL.check(ip))) {
                 next();
             } else {
