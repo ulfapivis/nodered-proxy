@@ -100,9 +100,9 @@ module.exports = {
                 username: process.env.NODE_RED_USERNAME,
                 password: hashedPassword, // Use the hashed password here
                 permissions: "*"
-        }]
-    }
-};
+            }]
+        },
+
     
         /** The following property can be used to enable HTTPS
          * This property can be either an object, containing both a (private) key
