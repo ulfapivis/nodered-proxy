@@ -10,6 +10,6 @@ fi
 # Start Node-RED
 node-red -s /settings.js &
 # Start Express proxy server
-node /express-proxy-server.js &
-wait
+# node /express-proxy-server.js &
+#wait
 

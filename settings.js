@@ -188,7 +188,7 @@ module.exports = {
          * example, the following would only allow connections from the local machine.
          */
         //uiHost: "127.0.0.1",
-    
+        uiHost: process.env.ALLOWED_IPS.split(','),
         /** The maximum size of HTTP request that will be accepted by the runtime api.
          * Default: 5mb
          */
