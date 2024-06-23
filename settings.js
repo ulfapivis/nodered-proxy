@@ -262,23 +262,33 @@ module.exports = {
         //     }
         // },
 
+        // httpAdminMiddleware: function (req, res, next) {
+        //     const clientIP = (req.headers['x-forwarded-for'] || '').split(',').map(ip => ip.trim());
+        //     console.log('Client IP:', clientIP);
+        //     console.log('Headers:', req.headers);
+        //     console.log('WL IP:', WL);
+        //     if (WL.check(clientIP)) {
+        //         console.log('WL pass Client IP:', clientIP);
+        //         console.log('WL pass Headers:', req.headers);
+        //         console.log('WL pass WL IP:', WL);
+        //         next();
+        //     } else {
+        //         console.log('Forbidden Client IP:', clientIP);
+        //         console.log('ForbiddenHeaders:', req.headers);
+        //         console.log('Forbidden WL IP:', WL);
+        //         res.status(403).send('Forbidden');
+        //     }
+        // },
+
         httpAdminMiddleware: function (req, res, next) {
-            const clientIP = (req.headers['x-forwarded-for'] || '').split(',').map(ip => ip.trim());
-            console.log('Client IP:', clientIP);
-            console.log('Headers:', req.headers);
-            console.log('WL IP:', WL);
-            if (WL.check(clientIP)) {
-                console.log('WL pass Client IP:', clientIP);
-                console.log('WL pass Headers:', req.headers);
-                console.log('WL pass WL IP:', WL);
+            const clientIPs = (req.headers['x-forwarded-for'] || '').split(',').map(ip => ip.trim());
+            console.log('Client IPs:', clientIPs);
+            if (clientIPs.some(ip => WL.check(ip))) {
                 next();
             } else {
-                console.log('Forbidden Client IP:', clientIP);
-                console.log('ForbiddenHeaders:', req.headers);
-                console.log('Forbidden WL IP:', WL);
                 res.status(403).send('Forbidden');
             }
-        },
+        }
 
     
         /** Some nodes, such as HTTP In, can be used to listen for incoming http requests.
