@@ -26,7 +26,7 @@ const { hashPassword } = require('./passwordUtils');
 // Usage:
 const plainPasswordFromEnv = process.env.NODE_RED_PASSWORD;
 const hashedPassword = hashPassword(plainPasswordFromEnv);
-
+console.log('Password hashing :', hashedPassword);
 module.exports = {
 
 
