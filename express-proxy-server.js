@@ -26,7 +26,8 @@ const csp = {
 
 app.use(helmet.contentSecurityPolicy(csp));
 
-const allowedIps = process.env.ALLOWED_IPS.split(',');
+const allowedIps = process.env.ALLOWED_IPS
+//.split(',');
 
 // Middleware to check if the request is from an allowed IP
 // app.use((req, res, next) => {
@@ -62,7 +63,7 @@ app.use((req, res, next) => {
   }
 });
 
-app.use('/node-red', createProxyMiddleware({ 
+app.use('/', createProxyMiddleware({ 
   target: 'http://node-red:1880',
   changeOrigin: true,
   ws: true,
