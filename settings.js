@@ -20,6 +20,24 @@
  *
  **/
 
+const bcrypt = require('bcrypt');
+
+// Function to hash the password
+async function hashPassword(password) {
+    const saltRounds = 10; // You can adjust the number of salt rounds as needed
+    try {
+        const hashedPassword = await bcrypt.hash(password, saltRounds);
+        return hashedPassword;
+    } catch (error) {
+        console.error('Error hashing password:', error);
+        throw error;
+    }
+}
+
+// Usage:
+const plainPasswordFromEnv = process.env.NODE_RED_PASSWORD;
+const hashedPassword = await hashPassword(plainPasswordFromEnv);
+
 module.exports = {
 
 
@@ -77,14 +95,25 @@ module.exports = {
          */
         
 
+        // adminAuth: {
+        //     type: "credentials",
+        //     users: [{
+        //         username: process.env.NODE_RED_USERNAME,
+        //         password: process.env.NODE_RED_PASSWORD,
+        //         permissions: "*"
+        //     }]
+        // },
+
+            // Update your adminAuth configuration
         adminAuth: {
             type: "credentials",
             users: [{
                 username: process.env.NODE_RED_USERNAME,
-                password: process.env.NODE_RED_PASSWORD,
+                password: hashedPassword, // Use the hashed password here
                 permissions: "*"
-            }]
-        },
+        }]
+    }
+};
     
         /** The following property can be used to enable HTTPS
          * This property can be either an object, containing both a (private) key
