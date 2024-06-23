@@ -29,7 +29,7 @@ RUN apk add --no-cache tini && \
 
 # Set up the Express server as a reverse proxy
 COPY express-proxy-server.js /express-proxy-server.js
-RUN npm install express http-proxy-middleware helmet cors
+RUN npm install express http-proxy-middleware helmet cors bcrypt
 
 # # Copy the start script into the container
 # COPY start.sh /data/start.sh
