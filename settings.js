@@ -19,14 +19,19 @@
  *  - Node Settings
  *
  **/
+// Usage:
+// const plainPasswordFromEnv = process.env.NODE_RED_PASSWORD;
+// const hashedPassword = hashPassword(plainPasswordFromEnv);
+// console.log('Password hashing :', hashedPassword);
 
 const { hashPassword } = require('./passwordUtils');
 
+async function setupPassword() {
+    const plainPasswordFromEnv = process.env.NODE_RED_PASSWORD;
+    const hashedPassword = await hashPassword(plainPasswordFromEnv);
+    console.log('Password hashing :', hashedPassword);
+};
 
-// Usage:
-const plainPasswordFromEnv = process.env.NODE_RED_PASSWORD;
-const hashedPassword = hashPassword(plainPasswordFromEnv);
-console.log('Password hashing :', hashedPassword);
 module.exports = {
 
 
