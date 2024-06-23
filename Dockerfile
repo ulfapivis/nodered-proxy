@@ -32,10 +32,10 @@ RUN apk add --no-cache tini && \
 #RUN npm install express http-proxy-middleware helmet cors bcrypt
 RUN npm install cors bcrypt
 # # Copy the start script into the container
-# COPY start.sh /data/start.sh
+COPY start.sh /data/start.sh
 
 # # Give execute permissions to the start script
-# RUN chmod +x /data/start.sh
+RUN chmod +x /data/start.sh
 
 # Start Node-RED with Tini to handle proper process termination
 ENTRYPOINT ["/sbin/tini", "--"]
