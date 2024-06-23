@@ -28,19 +28,39 @@ console.log('ALLOWED_IPS :', process.env.ALLOWED_IPS);
 const bcrypt = require('bcrypt');
 
 // uiHost: process.env.ALLOWED_IPS.split(','),
-const allowedIPs = process.env.ALLOWED_IPS.split(',');
+// const allowedIPs = process.env.ALLOWED_IPS.split(',');
+// const { BlockList } = require("net");
+// const WL = new BlockList();
+// allowedIPs.forEach((v, i, a) => {
+//   if (v.includes("/")) {
+//     const Parts = v.split("/");
+//     WL.addSubnet(Parts[0].trim(), parseInt(Parts[1].trim()));
+//   } else if (v.includes("-")) {
+//     const Parts = v.split("-");
+//     WL.addRange(Parts[0].trim(), Parts[1].trim());
+//   } else {
+//     WL.addAddress(v.trim());
+//   }
+// });
+
+
+
+
+
+const allowedIPs = process.env.ALLOWED_IPS.split(',').map(ip => ip.trim());
 const { BlockList } = require("net");
 const WL = new BlockList();
+
 allowedIPs.forEach((v, i, a) => {
-  if (v.includes("/")) {
-    const Parts = v.split("/");
-    WL.addSubnet(Parts[0].trim(), parseInt(Parts[1].trim()));
-  } else if (v.includes("-")) {
-    const Parts = v.split("-");
-    WL.addRange(Parts[0].trim(), Parts[1].trim());
-  } else {
-    WL.addAddress(v.trim());
-  }
+    if (v.includes("/")) {
+        const Parts = v.split("/");
+        WL.addSubnet(Parts[0].trim(), parseInt(Parts[1].trim()));
+    } else if (v.includes("-")) {
+        const Parts = v.split("-");
+        WL.addRange(Parts[0].trim(), Parts[1].trim());
+    } else {
+        WL.addAddress(v.trim());
+    }
 });
 
 module.exports = {
