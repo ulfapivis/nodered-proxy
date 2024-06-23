@@ -248,8 +248,8 @@ module.exports = {
             if (WL.check(clientIP)) {
                 next();
             } else {
-                res.status(401).end();
-                // res.status(403).send('Forbidden');
+                // res.status(401).end();
+                res.status(403).send('Forbidden');
             }
         },
 
