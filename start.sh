@@ -4,6 +4,8 @@
 FLOW_DATA="$NODE_RED_FLOW"
 echo "Flow data received: $FLOW_DATA"
 
+chmod 777 /data
+
 # Copy the flow data to the /data directory
 echo "$FLOW_DATA" > /data/flows.json
 
