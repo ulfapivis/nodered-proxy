@@ -39,6 +39,7 @@ RUN chown -R node-red:node-red /data
 RUN chmod 777 /data
 # Start Node-RED with Tini to handle proper process termination
 ENTRYPOINT ["/sbin/tini", "--"]
-
+# Expose port
+EXPOSE 10000
 USER node-red
 CMD ["/bin/bash", "-c", "/start.sh"]
