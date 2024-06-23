@@ -3,7 +3,7 @@
 FLOW_DATA="$NODE_RED_FLOW"
 
 # Copy the flow data to the /data directory
-echo "$FLOW_DATA" > /data/flow.json
+echo "$FLOW_DATA" > /data/flows.json
 
 if [ -n "${CUSTOM_NODES}" ]; then
     # If not empty, install the custom nodes
