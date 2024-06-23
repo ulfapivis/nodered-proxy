@@ -22,17 +22,6 @@
 
 const { hashPassword } = require('./passwordUtils');
 
-// Function to hash the password
-async function hashPassword(password) {
-    const saltRounds = 10; // You can adjust the number of salt rounds as needed
-    try {
-        const hashedPassword = await bcrypt.hash(password, saltRounds);
-        return hashedPassword;
-    } catch (error) {
-        console.error('Error hashing password:', error);
-        throw error;
-    }
-}
 
 // Usage:
 const plainPasswordFromEnv = process.env.NODE_RED_PASSWORD;
