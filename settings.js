@@ -561,11 +561,11 @@ module.exports = {
          * will allow the `os` module to be accessed in a Function node using:
          *    global.get("os")
          */
-        functionGlobalContext: {
-            os:require('os'),
-            cheerio:require('cheerio'),
-            crypto:require('crypto'),
-        },
+        // functionGlobalContext: {
+        //     os:require('os'),
+        //     cheerio:require('cheerio'),
+        //     crypto:require('crypto'),
+        // },
 
         //     functionGlobalContext: {
         // dotenv:require('dotenv').config(),
