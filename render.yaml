@@ -19,6 +19,8 @@ services:
         sync: false
       - key: NODE_RED_FLOW
         sync: false
+      - key: NODE_RED_FLOW_CRED
+        sync: false
     disk:
         name: data
         mountPath: /data
