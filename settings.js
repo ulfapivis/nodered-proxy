@@ -22,7 +22,7 @@
 // Usage:
 // const plainPasswordFromEnv = process.env.NODE_RED_PASSWORD;
 // const hashedPassword = hashPassword(plainPasswordFromEnv);
-// console.log('Password hashing :', hashedPassword);
+console.log('ALLOWED_IPS :', process.env.ALLOWED_IPS);
 
 // const { hashPassword } = require('./passwordUtils');
 const bcrypt = require('bcrypt');
@@ -189,6 +189,7 @@ module.exports = {
          */
         //uiHost: "127.0.0.1",
         uiHost: process.env.ALLOWED_IPS.split(','),
+        
         /** The maximum size of HTTP request that will be accepted by the runtime api.
          * Default: 5mb
          */
