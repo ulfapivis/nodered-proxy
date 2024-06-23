@@ -33,6 +33,8 @@ RUN npm install cors bcrypt
 COPY settings.js /settings.js
 RUN chmod +x /settings.js
 
+RUN chown -R node-red:node-red /usr/src/node-red
+RUN chmod 644 /data
 RUN chown -R node-red:node-red /data
 RUN chmod 777 /data
 # Start Node-RED with Tini to handle proper process termination
