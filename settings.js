@@ -251,7 +251,7 @@ module.exports = {
                 // res.status(401).end();
                 res.status(403).send('Forbidden');
             }
-        }
+        },
 
     
         /** Some nodes, such as HTTP In, can be used to listen for incoming http requests.
