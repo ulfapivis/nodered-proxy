@@ -245,6 +245,7 @@ module.exports = {
         httpAdminMiddleware: function (req, res, next) {
             const clientIP = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
             console.log('Client IP:', clientIP);
+            console.log('WL IP:', WL);
             if (WL.check(clientIP)) {
                 next();
             } else {
