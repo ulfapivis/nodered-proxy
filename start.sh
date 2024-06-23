@@ -1,4 +1,9 @@
 #!/bin/bash
+# Load flow data from the environmental variable
+FLOW_DATA="$NODE_RED_FLOW"
+
+# Copy the flow data to the /data directory
+echo "$FLOW_DATA" > /data/flow.json
 
 if [ -n "${CUSTOM_NODES}" ]; then
     # If not empty, install the custom nodes
@@ -8,8 +13,6 @@ else
 fi
 
 # Start Node-RED
-node-red -s /settings.js
-# Start Express proxy server
-# node /express-proxy-server.js &
-#wait
+node-red -s /data/settings.js
+
 
