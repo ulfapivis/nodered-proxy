@@ -73,6 +73,6 @@ app.use('/node-red', createProxyMiddleware({
   },
 }));
 
-app.listen(10000, () => {
-  console.log('Express server listening on port 10000');
+app.listen(8080, () => {
+  console.log('Express server listening on port 8080');
 });
