@@ -233,14 +233,25 @@ module.exports = {
         //    //res.set('X-Frame-Options', 'sameorigin');
         //    next();
         // },
+        // httpAdminMiddleware: function (req, res, next) {
+        //     console.log(req.ip);  
+        //     if (WL.check(req.ip)) {
+        //     next();
+        //     } else {
+        //     res.status(401).end();
+        //     }
+        // },
+
         httpAdminMiddleware: function (req, res, next) {
-            console.log(req.ip);  
-            if (WL.check(req.ip)) {
-            next();
+            const clientIP = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+            console.log('Client IP:', clientIP);
+            if (WL.check(clientIP)) {
+                next();
             } else {
-            res.status(401).end();
+                // res.status(401).end();
+                res.status(403).send('Forbidden');
             }
-        },
+        }
 
     
         /** Some nodes, such as HTTP In, can be used to listen for incoming http requests.
