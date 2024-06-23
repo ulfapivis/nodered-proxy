@@ -20,7 +20,7 @@
  *
  **/
 
-const bcrypt = require('bcrypt');
+const { hashPassword } = require('./passwordUtils');
 
 // Function to hash the password
 async function hashPassword(password) {

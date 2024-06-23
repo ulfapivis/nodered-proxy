@@ -16,9 +16,11 @@ RUN chmod +x /settings.js
 #COPY custom_nodes.sh /data/custom_nodes.sh
 #RUN chmod +x /data/custom_nodes.sh
 
+COPY passwordUtils.js /passwordUtils.js
+RUN chmod +x /passwordUtils.js
+
 COPY start.sh /start.sh
 RUN chmod +x /start.sh
-
 # Install necessary programs and npm packages
 RUN apk add --no-cache tini && \
     npm install -g npm@latest && \
