@@ -27,6 +27,21 @@ console.log('ALLOWED_IPS :', process.env.ALLOWED_IPS);
 // const { hashPassword } = require('./passwordUtils');
 const bcrypt = require('bcrypt');
 
+// uiHost: process.env.ALLOWED_IPS.split(','),
+const allowedIPs = process.env.ALLOWED_IPS.split(',');
+const { BlockList } = require("net");
+const WL = new BlockList();
+allowedIPs.forEach((v, i, a) => {
+  if (v.includes("/")) {
+    const Parts = v.split("/");
+    WL.addSubnet(Parts[0].trim(), parseInt(Parts[1].trim()));
+  } else if (v.includes("-")) {
+    const Parts = v.split("-");
+    WL.addRange(Parts[0].trim(), Parts[1].trim());
+  } else {
+    WL.addAddress(v.trim());
+  }
+});
 
 module.exports = {
 
@@ -188,7 +203,7 @@ module.exports = {
          * example, the following would only allow connections from the local machine.
          */
         //uiHost: "127.0.0.1",
-        uiHost: process.env.ALLOWED_IPS.split(','),
+        
         
         /** The maximum size of HTTP request that will be accepted by the runtime api.
          * Default: 5mb
@@ -218,6 +233,14 @@ module.exports = {
         //    //res.set('X-Frame-Options', 'sameorigin');
         //    next();
         // },
+        httpAdminMiddleware: function (req, res, next) {
+            console.log(req.ip);  
+            if (WL.check(req.ip)) {
+            next();
+            } else {
+            res.status(401).end();
+            }
+        },
 
     
         /** Some nodes, such as HTTP In, can be used to listen for incoming http requests.
