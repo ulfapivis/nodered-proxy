@@ -24,14 +24,9 @@
 // const hashedPassword = hashPassword(plainPasswordFromEnv);
 // console.log('Password hashing :', hashedPassword);
 
-const { hashPassword } = require('./passwordUtils');
+// const { hashPassword } = require('./passwordUtils');
 
-// Hash the password during initialization
-const plainPasswordFromEnv = process.env.NODE_RED_PASSWORD;
-hashPassword(plainPasswordFromEnv)
-    .then((hashedPassword) => {
-        console.log('Password hashing:', hashedPassword);
-    });
+
 
 module.exports = {
 
@@ -98,7 +93,14 @@ module.exports = {
         //         permissions: "*"
         //     }]
         // },
+        // Hash the password during initialization
+        // const plainPasswordFromEnv = process.env.NODE_RED_PASSWORD;
+        // hashPassword(plainPasswordFromEnv)
+        //     .then((hashedPassword) => {
+        //         console.log('Password hashing:', hashedPassword);
+        //     });
 
+        adminAuth: require("./passwordUtils"),
             // Update your adminAuth configuration
         adminAuth: {
             type: "credentials",
