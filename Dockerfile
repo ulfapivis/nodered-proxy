@@ -9,6 +9,7 @@ USER root
 # ENV NODE_RED_PASSWORD=${NODE_RED_PASSWORD}
 # ENV NODE_RED_CREDENTIAL_SECRET=${NODE_RED_CREDENTIAL_SECRET}
 # ENV ALLOWED_IPS=${ALLOWED_IPS}
+ENV NODE_RED_FLOW=${NODE_RED_FLOW}
 WORKDIR /usr/src/node-red
 # # Copy the settings.js file into the container
 COPY settings.js /data/settings.js
@@ -19,7 +20,8 @@ RUN chmod +x /data/settings.js
 COPY start.sh /start.sh
 RUN chmod +x /start.sh
 # Install necessary programs and npm packages
-RUN npm install -g npm@latest && \
+RUN apk add --no-cache tini && \
+    npm install -g npm@latest && \
     npm cache clean --force
 
 
@@ -27,6 +29,8 @@ RUN npm install -g npm@latest && \
 #COPY express-proxy-server.js /express-proxy-server.js
 #RUN npm install express http-proxy-middleware helmet cors bcrypt
 RUN npm install cors bcrypt
+# Start Node-RED with Tini to handle proper process termination
+ENTRYPOINT ["/sbin/tini", "--"]
 
 USER node-red
 CMD ["/bin/bash", "-c", "/start.sh"]
