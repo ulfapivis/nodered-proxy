@@ -25,7 +25,7 @@
 // console.log('Password hashing :', hashedPassword);
 
 // const { hashPassword } = require('./passwordUtils');
-
+const bcrypt = require('bcrypt');
 
 
 module.exports = {
@@ -100,13 +100,22 @@ module.exports = {
         //         console.log('Password hashing:', hashedPassword);
         //     });
 
-        adminAuth: require("./passwordUtils"),
-            // Update your adminAuth configuration
+        // adminAuth: require("./passwordUtils"),
+        //     // Update your adminAuth configuration
+        // adminAuth: {
+        //     type: "credentials",
+        //     users: [{
+        //         username: process.env.NODE_RED_USERNAME,
+        //         password: hashedPassword, // Use the hashed password here
+        //         permissions: "*"
+        //     }]
+        // },
+
         adminAuth: {
             type: "credentials",
             users: [{
                 username: process.env.NODE_RED_USERNAME,
-                password: hashedPassword, // Use the hashed password here
+                password: bcrypt.hashSync(process.env.NODE_RED_PASSWORD, 10), // Hash the password
                 permissions: "*"
             }]
         },
