@@ -12,8 +12,7 @@ USER root
 ENV NODE_RED_FLOW=${NODE_RED_FLOW}
 WORKDIR /usr/src/node-red
 # # Copy the settings.js file into the container
-COPY settings.js /data/settings.js
-RUN chmod +x /data/settings.js
+
 #COPY custom_nodes.sh /data/custom_nodes.sh
 #RUN chmod +x /data/custom_nodes.sh
 
@@ -29,6 +28,10 @@ RUN apk add --no-cache tini && \
 #COPY express-proxy-server.js /express-proxy-server.js
 #RUN npm install express http-proxy-middleware helmet cors bcrypt
 RUN npm install cors bcrypt
+
+COPY settings.js /settings.js
+RUN chmod +x /settings.js
+
 # Start Node-RED with Tini to handle proper process termination
 ENTRYPOINT ["/sbin/tini", "--"]
 
