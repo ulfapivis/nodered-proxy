@@ -26,11 +26,12 @@
 
 const { hashPassword } = require('./passwordUtils');
 
-async function setupPassword() {
-    const plainPasswordFromEnv = process.env.NODE_RED_PASSWORD;
-    const hashedPassword = await hashPassword(plainPasswordFromEnv);
-    console.log('Password hashing :', hashedPassword);
-};
+// Hash the password during initialization
+const plainPasswordFromEnv = process.env.NODE_RED_PASSWORD;
+hashPassword(plainPasswordFromEnv)
+    .then((hashedPassword) => {
+        console.log('Password hashing:', hashedPassword);
+
 
 module.exports = {
 
@@ -633,4 +634,8 @@ module.exports = {
         //    *   - reason: if result is false, the HTTP reason string to return
         //    */
         //},
-    }
+    };
+})
+.catch((error) => {
+    console.error('Error hashing password:', error);
+});
