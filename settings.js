@@ -263,7 +263,7 @@ module.exports = {
         // },
 
         httpAdminMiddleware: function (req, res, next) {
-            const clientIPs = (req.headers['x-forwarded-for'] || '').split(',').map(ip => ip.trim());
+            const clientIP = (req.headers['x-forwarded-for'] || '').split(',').map(ip => ip.trim());
             console.log('Client IP:', clientIP);
             console.log('Headers:', req.headers);
             console.log('WL IP:', WL);
