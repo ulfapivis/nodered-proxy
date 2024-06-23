@@ -31,7 +31,7 @@ const plainPasswordFromEnv = process.env.NODE_RED_PASSWORD;
 hashPassword(plainPasswordFromEnv)
     .then((hashedPassword) => {
         console.log('Password hashing:', hashedPassword);
-
+    });
 
 module.exports = {
 
@@ -635,7 +635,3 @@ module.exports = {
         //    */
         //},
     };
-})
-.catch((error) => {
-    console.error('Error hashing password:', error);
-});
