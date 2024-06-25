@@ -1,11 +1,11 @@
 #!/bin/bash
 
-# Load flow data from the environmental variable
-FLOW_DATA="$NODE_RED_FLOW"
-#echo "Flow data received: $FLOW_DATA"
-
-# Copy the flow data to the /data directory
-echo "$FLOW_DATA" > /data/flows.json
+# load flows.json if specified
+if [ -n "${FLOW_DATA}" ]; then
+    echo "$FLOW_DATA" > /data/flows.json
+else
+    echo "No flows.json"
+fi
 
 # Verify if the file was created
 ls -l /data/flows.json
