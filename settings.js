@@ -22,7 +22,7 @@
 // Usage:
 // const plainPasswordFromEnv = process.env.NODE_RED_PASSWORD;
 // const hashedPassword = hashPassword(plainPasswordFromEnv);
-console.log('ALLOWED_IPS :', process.env.ALLOWED_IPS);
+
 
 // const { hashPassword } = require('./passwordUtils');
 const bcrypt = require('bcrypt');
@@ -82,12 +82,12 @@ const bcrypt = require('bcrypt');
 // }
 
 const allowedIPs = process.env.ALLOWED_IPS || ''; // Default to an empty string if ALLOWED_IPS is not set
+console.log('ALLOWED_IPS :', allowedIPs);
 const { BlockList } = require("net");
 const WL = new BlockList();
 
-if (allowedIPs) {
-    const ipList = allowedIPs.split(',').map(ip => ip.trim());
-    ipList.forEach((v, i, a) => {
+if (allowedIPs.length > 0) {
+    allowedIPs.forEach((v, i, a) => {
         if (v.includes("/")) {
             const Parts = v.split("/");
             WL.addSubnet(Parts[0].trim(), parseInt(Parts[1].trim()));
@@ -252,7 +252,7 @@ module.exports = {
      ******************************************************************************/
     
         /** the tcp port that the Node-RED web server is listening on */
-        uiPort: process.env.PORT || 1880,
+        uiPort: process.env.PORT || 10000,
     
         /** By default, the Node-RED UI accepts connections on all IPv4 interfaces.
          * To listen on all IPv6 addresses, set uiHost to "::",
