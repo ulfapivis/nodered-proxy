@@ -8,9 +8,9 @@ else
 fi
 
 # Verify if the file was created
-ls -l /data/flows.json
+ls -l /settings.js
 
-# load custom_flows.json if specified
+# load if specified
 if [ -n "${NODE_RED_FLOW_CRED}" ]; then
     echo "$NODE_RED_FLOW_CRED" > /data/flows_cred.json
 else
@@ -25,7 +25,13 @@ else
 fi
 
 # Start Node-RED
-node-red -s /settings.js
+
+if [ -n "${ALLOWED_IPS}" ]; then
+    node-red -s /settings.js
+else
+    node-red -s /settings_noip.js
+fi
+
 
 
 
