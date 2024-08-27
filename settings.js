@@ -656,7 +656,7 @@ module.exports = {
         //debugUseColors: true,
     
         /** The maximum length, in characters, of any message sent to the debug sidebar tab */
-        debugMaxLength: 4000,
+        debugMaxLength: 25000,
     
         /** Maximum buffer size for the exec node. Defaults to 10Mb */
         //execMaxBufferSize: 10000000,

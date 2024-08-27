@@ -1,6 +1,6 @@
 services:
   - type: web
-    plan: starter
+    plan: free
     name: node-red
     env: docker
     dockerfilePath: ./Dockerfile
